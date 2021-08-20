@@ -1,6 +1,7 @@
 FROM nvidia/cuda:11.4.1-devel-ubuntu20.04
 
-ARG OPENCV_VERSION=4.5.3
+ARG OPENCV_VERSION=4.5.3\
+    DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade -y &&\
     # Install build tools, build dependencies and python
@@ -64,4 +65,13 @@ RUN cd /opt/ &&\
     make install && \
     ldconfig &&\
     # Remove OpenCV sources and build folder
-    rm -rf /opt/opencv-${OPENCV_VERSION} && rm -rf /opt/opencv_contrib-${OPENCV_VERSION}
+    rm -rf /opt/opencv-${OPENCV_VERSION} && rm -rf /opt/opencv_contrib-${OPENCV_VERSION}\
+    apt update\
+    apt upgrade\
+    apt install python3-pip\
+    pip3 install gpiozero pigpio\
+    pip3 install imutils\
+    pip3 install flask
+
+    
+
