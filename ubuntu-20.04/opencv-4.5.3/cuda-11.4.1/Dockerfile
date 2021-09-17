@@ -39,7 +39,12 @@ RUN apt-get update && apt-get upgrade -y &&\
         ## Python
         python3-dev \
         python3-numpy \
+        python3-pip \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install gpiozero pigpio 
+RUN pip3 install imutils 
+RUN pip3 install flask 
 
 RUN cd /opt/ &&\
     # Download and unzip OpenCV and opencv_contrib and delte zip files
@@ -65,13 +70,4 @@ RUN cd /opt/ &&\
     make install && \
     ldconfig &&\
     # Remove OpenCV sources and build folder
-    rm -rf /opt/opencv-${OPENCV_VERSION} && rm -rf /opt/opencv_contrib-${OPENCV_VERSION}\
-    apt update\
-    apt upgrade\
-    apt install python3-pip\
-    pip3 install gpiozero pigpio\
-    pip3 install imutils\
-    pip3 install flask
-
-    
-
+    rm -rf /opt/opencv-${OPENCV_VERSION} && rm -rf /opt/opencv_contrib-${OPENCV_VERSION}
